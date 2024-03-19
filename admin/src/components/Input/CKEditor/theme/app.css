@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Krungthai Fast';
+  src: url('../fonts/KrungthaiFast-Regular.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-Italic.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-Light.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-LightItalic.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-UltraLight.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-UltraLightItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Krungthai Fast';
+  src: url('../fonts/KrungthaiFast-Bold.ttf') format('truetype'),
+    url('../fonts/KrungthaiFast-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+

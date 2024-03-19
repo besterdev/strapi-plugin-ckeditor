@@ -19,7 +19,6 @@ export const common = css`
     --ck-todo-list-checkmark-size: 16px;
   }
 
-  
   .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
     top: 64px !important;
   }
@@ -28,17 +27,15 @@ export const common = css`
   }
 
   .ck-editor__main {
-    
-    --ck-font-face: "Source Sans Pro", system-ui, Roboto, "Helvetica Neue", "Helvetica", Arial, sans-serif;
-    
-    color: var(--ck-color-editor-base-text);
+    --ck-font-face: "Krungthai Fast", "Source Sans Pro", system-ui, Roboto,
+      "Helvetica Neue", "Helvetica", Arial, sans-serif;
+
+    color: #212529;
     font-family: var(--ck-font-face);
 
     * {
       font: revert;
-      margin: revert;
     }
-
 
     h1 {
       font-size: 2.3em;
@@ -64,25 +61,14 @@ export const common = css`
       font-size: 1em;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      line-height: 1.2em;
-      padding-top: .8em;
-      margin-bottom: .4em
-    }
-
     blockquote,
     ol,
     p,
     ul {
       font-size: 1em;
       line-height: 1.6em;
-      padding-top: .2em;
-      margin-bottom: var(--ck-spacing-large)
+      padding-top: 0.2em;
+      margin-bottom: var(--ck-spacing-large);
     }
 
     figcaption {
@@ -98,11 +84,12 @@ export const common = css`
 
     a {
       text-decoration: none;
-      color: #1b3af2;
+      color: #0082ef;
     }
 
     a:hover {
       text-decoration: underline;
+      text-decoration-color: #0082ef;
     }
 
     .table {
@@ -137,7 +124,7 @@ export const common = css`
 
     .ck.ck-content.ck-editor__editable {
       line-height: initial;
-      min-height: 12.5rem;
+      min-height: 500px;
       border-bottom-left-radius: 0.25rem;
       border-bottom-right-radius: 0.25rem;
       transition-property: border-color, box-shadow, max-height;
@@ -180,7 +167,7 @@ export const common = css`
     }
   }
 
-  .ck .ck-source-editing-area textarea{
+  .ck .ck-source-editing-area textarea {
     color: var(--ck-color-text);
     background-color: var(--ck-color-base-background);
     border: 1px solid var(--ck-color-base-border) !important;
@@ -193,7 +180,7 @@ export const common = css`
     width: 20px !important;
     height: 25px !important;
     margin-left: -2px !important ;
-    
+
     & svg {
       color: var(--ck-color-text) !important;
       position: absolute;
@@ -210,22 +197,21 @@ export const common = css`
     font-size: 0.7rem;
     font-weight: 500;
     text-transform: lowercase;
-    /* color: #b3b3c4; */
   }
 
-  .ck[dir=rtl]{
+  .ck[dir="rtl"] {
     .ck-block-toolbar-button {
       margin-left: 2px !important ;
     }
-    & + div{
+    & + div {
       justify-content: flex-start;
       & > .ck-word-count {
-          & > div:first-child{
-            order: 2;
-          }
-          & > div:last-child{
-            order: 1;
-          }
+        & > div:first-child {
+          order: 2;
+        }
+        & > div:last-child {
+          order: 1;
+        }
       }
     }
   }

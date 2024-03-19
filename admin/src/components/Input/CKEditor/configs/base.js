@@ -30,10 +30,9 @@ import ckeditor5MentionDll from "@ckeditor/ckeditor5-mention/build/mention.js";
 import ckeditor5FontDll from "@ckeditor/ckeditor5-font/build/font.js";
 import ckeditor5ShowBlocksDll from "@ckeditor/ckeditor5-show-blocks/build/show-blocks.js";
 
-
 import sanitizeHtml from "sanitize-html";
 
-import * as strapiPlugins from '../plugins'
+import * as strapiPlugins from "../plugins";
 window.CKEditor5.strapiPlugins = strapiPlugins;
 
 const w = {
@@ -90,12 +89,17 @@ const w = {
   RemoveFormat: window.CKEditor5.removeFormat.RemoveFormat,
   SourceEditing: window.CKEditor5.sourceEditing.SourceEditing,
   SpecialCharacters: window.CKEditor5.specialCharacters.SpecialCharacters,
-  SpecialCharactersArrows: window.CKEditor5.specialCharacters.SpecialCharactersArrows,
-  SpecialCharactersCurrency: window.CKEditor5.specialCharacters.SpecialCharactersCurrency,
+  SpecialCharactersArrows:
+    window.CKEditor5.specialCharacters.SpecialCharactersArrows,
+  SpecialCharactersCurrency:
+    window.CKEditor5.specialCharacters.SpecialCharactersCurrency,
   // SpecialCharactersEssentials: window.CKEditor5.specialCharacters.SpecialCharactersEssentials,
-  SpecialCharactersLatin: window.CKEditor5.specialCharacters.SpecialCharactersLatin,
-  SpecialCharactersMathematical: window.CKEditor5.specialCharacters.SpecialCharactersMathematical,
-  SpecialCharactersText: window.CKEditor5.specialCharacters.SpecialCharactersText,
+  SpecialCharactersLatin:
+    window.CKEditor5.specialCharacters.SpecialCharactersLatin,
+  SpecialCharactersMathematical:
+    window.CKEditor5.specialCharacters.SpecialCharactersMathematical,
+  SpecialCharactersText:
+    window.CKEditor5.specialCharacters.SpecialCharactersText,
   StrapiMediaLib: window.CKEditor5.strapiPlugins.StrapiMediaLib,
   StrapiUploadAdapter: window.CKEditor5.strapiPlugins.StrapiUploadAdapter,
   Strikethrough: window.CKEditor5.basicStyles.Strikethrough,
@@ -112,8 +116,8 @@ const w = {
   TextPartLanguage: window.CKEditor5.language.TextPartLanguage,
   TodoList: window.CKEditor5.list.TodoList,
   Underline: window.CKEditor5.basicStyles.Underline,
-  WordCount: window.CKEditor5.wordCount.WordCount
-}
+  WordCount: window.CKEditor5.wordCount.WordCount,
+};
 
 const REDUCED_MATERIAL_COLORS = [
   { label: "Red 50", color: "#ffebee" },
@@ -259,12 +263,42 @@ const base = {
   heading: {
     options: [
       { model: "paragraph", title: "Paragraph", class: "ck-heading_paragraph" },
-      { model: "heading1", view: "h1", title: "Heading 1", class: "ck-heading_heading1" },
-      { model: "heading2", view: "h2", title: "Heading 2", class: "ck-heading_heading2" },
-      { model: "heading3", view: "h3", title: "Heading 3", class: "ck-heading_heading3" },
-      { model: "heading4", view: "h4", title: "Heading 4", class: "ck-heading_heading4" },
-      { model: "heading5", view: "h5", title: "Heading 5", class: "ck-heading_heading5" },
-      { model: "heading6", view: "h6", title: "Heading 6", class: "ck-heading_heading6" },
+      {
+        model: "heading1",
+        view: "h1",
+        title: "Heading 1",
+        class: "ck-heading_heading1",
+      },
+      {
+        model: "heading2",
+        view: "h2",
+        title: "Heading 2",
+        class: "ck-heading_heading2",
+      },
+      {
+        model: "heading3",
+        view: "h3",
+        title: "Heading 3",
+        class: "ck-heading_heading3",
+      },
+      {
+        model: "heading4",
+        view: "h4",
+        title: "Heading 4",
+        class: "ck-heading_heading4",
+      },
+      {
+        model: "span",
+        view: "Span",
+        title: "Span",
+        class: "ck-heading_span",
+      },
+      {
+        model: "pre",
+        view: "pre",
+        title: "Code-block",
+        class: "ck-heading_pre",
+      },
     ],
   },
   htmlSupport: {
@@ -280,7 +314,10 @@ const base = {
       {
         attributes: [
           { key: /^on(.*)/i, value: true },
-          { key: /.*/, value: /(\b)(on\S+)(\s*)=|javascript:|(<\s*)(\/*)script/i },
+          {
+            key: /.*/,
+            value: /(\b)(on\S+)(\s*)=|javascript:|(<\s*)(\/*)script/i,
+          },
           { key: /.*/, value: /data:(?!image\/(png|jpeg|gif|webp))/i },
         ],
       },
@@ -317,10 +354,15 @@ const base = {
   image: {
     styles: {
       options: [
-        'inline', 'alignLeft', 'alignRight',
-        'alignCenter', 'alignBlockLeft', 'alignBlockRight',
-        'block', 'side'
-      ]
+        "inline",
+        "alignLeft",
+        "alignRight",
+        "alignCenter",
+        "alignBlockLeft",
+        "alignBlockRight",
+        "block",
+        "side",
+      ],
     },
     resizeOptions: [
       {
@@ -380,258 +422,315 @@ const base = {
   style: {
     definitions: [
       {
-        name: "Title",
+        name: "Heading",
         element: "h1",
-        classes: ["document-title"],
+        classes: ["document-heading"],
+      },
+      {
+        name: "Step Title",
+        element: "h4",
+        classes: ["document-step-title"],
+      },
+      {
+        name: "CodeBlock",
+        element: "pre",
+        classes: ["code-block"],
+      },
+      {
+        name: "Table title",
+        element: "h4",
+        classes: ["table-title"],
       },
       {
         name: "Subtitle",
-        element: "h2",
+        element: "p",
         classes: ["document-subtitle"],
       },
       {
-        name: "Callout",
+        name: "Info Box blue",
         element: "p",
-        classes: ["callout"],
+        classes: ["document-info-box-blue"],
       },
       {
-        name: "Side quote",
-        element: "blockquote",
-        classes: ["side-quote"],
+        name: "Info Box yellow",
+        element: "p",
+        classes: ["document-info-box-yellow"],
       },
       {
-        name: "Needs clarification",
-        element: "span",
-        classes: ["needs-clarification"],
+        name: "Link (blue)",
+        element: "a",
+        classes: ["link"],
       },
       {
-        name: "Wide spacing",
-        element: "span",
-        classes: ["wide-spacing"],
+        name: "Button filled link (blue)",
+        element: "a",
+        classes: ["button-link"],
       },
       {
-        name: "Small caps",
-        element: "span",
-        classes: ["small-caps"],
+        name: "Button outline link (blue)",
+        element: "a",
+        classes: ["button-outline-link"],
       },
       {
-        name: "Code (dark)",
-        element: "pre",
-        classes: ["stylish-code", "stylish-code-dark"],
+        name: "Image with border",
+        element: "p",
+        classes: ["img-wrapper--border"],
       },
       {
-        name: "Code (bright)",
-        element: "pre",
-        classes: ["stylish-code", "stylish-code-bright"],
+        name: "Why Us Icon",
+        element: "p",
+        classes: ["img-wrapper--whyus-icon"],
       },
     ],
   },
 };
 
-
-
 const basePlugins = [
-w.Alignment,
-w.Autoformat,
-w.AutoImage,
-w.BlockQuote,
-w.Bold,
-w.Code,
-w.CodeBlock,
-w.DocumentList,
-w.DocumentListProperties,
-w.Essentials,
-w.FontBackgroundColor,
-w.FontColor,
-w.FontFamily,
-w.FontSize,
-w.GeneralHtmlSupport,
-w.Heading,
-w.HorizontalLine,
-w.HtmlEmbed,
-w.Image,
-w.ImageCaption,
-w.ImageInsert,
-w.ImageResize,
-w.ImageStyle,
-w.ImageToolbar,
-w.ImageUpload,
-w.Indent,
-w.IndentBlock,
-w.Italic,
-w.Link,
-w.LinkImage,
-w.LinkImage,
-w.MediaEmbed,
-w.PageBreak,
-w.Paragraph,
-w.PasteFromOffice,
-w.PictureEditing,
-w.RemoveFormat,
-w.SourceEditing,
-w.SpecialCharacters,
-w.SpecialCharactersArrows,
-w.SpecialCharactersCurrency,
-w.SpecialCharactersLatin,
-w.SpecialCharactersMathematical,
-w.SpecialCharactersText,
-w.StrapiMediaLib,
-w.StrapiUploadAdapter,
-w.Strikethrough,
-w.Style,
-w.Subscript,
-w.Superscript,
-w.ShowBlocks,
-w.Table,
-w.TableCaption,
-w.TableCellProperties,
-w.TableColumnResize,
-w.TableProperties,
-w.TableToolbar,
-w.Underline,
-w.WordCount,
+  w.Alignment,
+  w.Autoformat,
+  w.AutoImage,
+  w.BlockQuote,
+  w.Bold,
+  w.Code,
+  w.CodeBlock,
+  w.DocumentList,
+  w.DocumentListProperties,
+  w.Essentials,
+  w.FontBackgroundColor,
+  w.FontColor,
+  w.FontFamily,
+  w.FontSize,
+  w.GeneralHtmlSupport,
+  w.Heading,
+  w.HorizontalLine,
+  w.HtmlEmbed,
+  w.Image,
+  w.ImageCaption,
+  w.ImageInsert,
+  w.ImageResize,
+  w.ImageStyle,
+  w.ImageToolbar,
+  w.ImageUpload,
+  w.Indent,
+  w.IndentBlock,
+  w.Italic,
+  w.Link,
+  w.LinkImage,
+  w.LinkImage,
+  w.MediaEmbed,
+  w.PageBreak,
+  w.Paragraph,
+  w.PasteFromOffice,
+  w.PictureEditing,
+  w.RemoveFormat,
+  w.SourceEditing,
+  w.SpecialCharacters,
+  w.SpecialCharactersArrows,
+  w.SpecialCharactersCurrency,
+  w.SpecialCharactersLatin,
+  w.SpecialCharactersMathematical,
+  w.SpecialCharactersText,
+  w.StrapiMediaLib,
+  w.StrapiUploadAdapter,
+  w.Strikethrough,
+  w.Style,
+  w.Subscript,
+  w.Superscript,
+  w.ShowBlocks,
+  w.Table,
+  w.TableCaption,
+  w.TableCellProperties,
+  w.TableColumnResize,
+  w.TableProperties,
+  w.TableToolbar,
+  w.Underline,
+  w.WordCount,
 ];
 
 export const toolbarEditorConfig = {
-  plugins:basePlugins,
+  plugins: basePlugins,
   ...base,
   toolbar: [
+    "undo",
+    "redo",
+    "heading",
+    "style",
+    "SourceEditing",
+    "|",
     {
-      label:' ',
+      label: " ",
       tooltip: null,
-      icon:'paragraph',
-      items: [  'heading','style','SourceEditing']
+      icon: "text",
+      items: [
+        "bold",
+        "italic",
+        "fontSize",
+        "fontFamily",
+        "fontColor",
+        "fontBackgroundColor",
+      ],
     },
-    '|',
-    {
-      label:' ', 
-      tooltip: null,
-      icon:'text',
-      items: [ 'bold', 'italic','fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor' ]
-    },
-    {
-      label:' ',
-      tooltip: null,
-      icon:`
-      <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0" fill="none" width="24" height="24"/>
-      <g>
-      <path d="M14.348 12H21v2h-4.613c.24.515.368 1.094.368 1.748 0 1.317-.474 2.355-1.423 3.114-.947.76-2.266 1.138-3.956 1.138-1.557 0-2.934-.293-4.132-.878v-2.874c.985.44 1.818.75 2.5.928.682.18 1.306.27 1.872.27.68 0 1.2-.13 1.562-.39.363-.26.545-.644.545-1.158 0-.285-.08-.54-.24-.763-.16-.222-.394-.437-.704-.643-.18-.12-.483-.287-.88-.49H3v-2H14.347zm-3.528-2c-.073-.077-.143-.155-.193-.235-.126-.202-.19-.44-.19-.713 0-.44.157-.795.47-1.068.313-.273.762-.41 1.348-.41.492 0 .993.064 1.502.19.51.127 1.153.35 1.93.67l1-2.405c-.753-.327-1.473-.58-2.16-.76-.69-.18-1.414-.27-2.173-.27-1.544 0-2.753.37-3.628 1.108-.874.738-1.312 1.753-1.312 3.044 0 .302.036.58.088.848h3.318z"/>
-      </g>
-      </svg>`,
-      items: [ 'underline', 'strikethrough', 'superscript', 'subscript' ]
-    },
-    'removeFormat',
-    '|',
-    'alignment',
-    'outdent',
-    'indent',
-    '|',
-    'bulletedList', 'numberedList',
-    '|',
-    'insertImage','mediaEmbed','strapiMediaLib','link','blockquote','insertTable','specialCharacters','htmlEmbed','codeBlock',
-    '|', 'horizontalLine', 'pageBreak', '|',
-    '|', 'showBlocks',
-    '|', 'undo', 'redo', '|',
+    "removeFormat",
+    "|",
+    "alignment",
+    "outdent",
+    "indent",
+    "|",
+    "bulletedList",
+    "numberedList",
+    "|",
+    "insertImage",
+    "mediaEmbed",
+    "strapiMediaLib",
+    "link",
+    "blockquote",
+    "insertTable",
+    "specialCharacters",
+    "htmlEmbed",
+    "codeBlock",
+    "|",
+    "horizontalLine",
+    "pageBreak",
+    "|",
+    "|",
+    "showBlocks",
+    "|",
   ],
-
-}
+};
 
 export const toolbarBalloonEditorConfig = {
-  plugins:[...basePlugins, w.BalloonToolbar],
+  plugins: [...basePlugins, w.BalloonToolbar],
   ...base,
   toolbar: [
     {
-      label:' ',
+      label: " ",
       tooltip: null,
-      icon:'paragraph',
-      items: [  'heading','style']
+      icon: "paragraph",
+      items: ["heading", "style"],
     },
-    '|',
-    'alignment',
-    'outdent',
-    'indent',
-    '|',
-    'bulletedList', 'numberedList',
-    '|',
-    'insertImage','mediaEmbed','strapiMediaLib','link','blockquote','insertTable','specialCharacters','htmlEmbed','codeBlock',
-    '|', 'horizontalLine', 'pageBreak', '|','SourceEditing',
-    '|', 'showBlocks',
-    '|', 'undo', 'redo', '|',
+    "|",
+    "alignment",
+    "outdent",
+    "indent",
+    "|",
+    "bulletedList",
+    "numberedList",
+    "|",
+    "insertImage",
+    "mediaEmbed",
+    "strapiMediaLib",
+    "link",
+    "blockquote",
+    "insertTable",
+    "specialCharacters",
+    "htmlEmbed",
+    "codeBlock",
+    "|",
+    "horizontalLine",
+    "pageBreak",
+    "|",
+    "SourceEditing",
+    "|",
+    "showBlocks",
+    "|",
+    "undo",
+    "redo",
+    "|",
   ],
   balloonToolbar: [
-    'bold', 'italic','fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor',
+    "bold",
+    "italic",
+    "fontSize",
+    "fontFamily",
+    "fontColor",
+    "fontBackgroundColor",
     {
-      label:' ',
+      label: " ",
       tooltip: null,
-      icon:`
+      icon: `
       <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" fill="none" width="24" height="24"/>
       <g>
       <path d="M14.348 12H21v2h-4.613c.24.515.368 1.094.368 1.748 0 1.317-.474 2.355-1.423 3.114-.947.76-2.266 1.138-3.956 1.138-1.557 0-2.934-.293-4.132-.878v-2.874c.985.44 1.818.75 2.5.928.682.18 1.306.27 1.872.27.68 0 1.2-.13 1.562-.39.363-.26.545-.644.545-1.158 0-.285-.08-.54-.24-.763-.16-.222-.394-.437-.704-.643-.18-.12-.483-.287-.88-.49H3v-2H14.347zm-3.528-2c-.073-.077-.143-.155-.193-.235-.126-.202-.19-.44-.19-.713 0-.44.157-.795.47-1.068.313-.273.762-.41 1.348-.41.492 0 .993.064 1.502.19.51.127 1.153.35 1.93.67l1-2.405c-.753-.327-1.473-.58-2.16-.76-.69-.18-1.414-.27-2.173-.27-1.544 0-2.753.37-3.628 1.108-.874.738-1.312 1.753-1.312 3.044 0 .302.036.58.088.848h3.318z"/>
       </g>
       </svg>`,
-      items: [ 'underline', 'strikethrough', 'superscript', 'subscript' ]
+      items: ["underline", "strikethrough", "superscript", "subscript"],
     },
-    '|',
-    'removeFormat',
-  ]
-}
+    "|",
+    "removeFormat",
+  ],
+};
 
 export const blockBalloonEditorConfig = {
-  plugins:[
-    ...basePlugins.filter(({pluginName})=>
-      pluginName !== "SourceEditing" &&
-      pluginName !== "SpecialCharacters" &&
-      pluginName !== "SpecialCharactersArrows" &&
-      pluginName !== "SpecialCharactersCurrency" &&
-      pluginName !== "SpecialCharactersEssentials" &&
-      pluginName !== "SpecialCharactersLatin" &&
-      pluginName !== "SpecialCharactersMathematical" &&
-      pluginName !== "SpecialCharactersText" &&
-      pluginName !== "PageBreak" &&
-      pluginName !== "HorizontalLine" &&
-      pluginName !== "MediaEmbed" &&
-      pluginName !== "HtmlEmbed" &&
-      pluginName !== "Code" &&
-      pluginName !== "CodeBlock"
+  plugins: [
+    ...basePlugins.filter(
+      ({ pluginName }) =>
+        pluginName !== "SourceEditing" &&
+        pluginName !== "SpecialCharacters" &&
+        pluginName !== "SpecialCharactersArrows" &&
+        pluginName !== "SpecialCharactersCurrency" &&
+        pluginName !== "SpecialCharactersEssentials" &&
+        pluginName !== "SpecialCharactersLatin" &&
+        pluginName !== "SpecialCharactersMathematical" &&
+        pluginName !== "SpecialCharactersText" &&
+        pluginName !== "PageBreak" &&
+        pluginName !== "HorizontalLine" &&
+        pluginName !== "MediaEmbed" &&
+        pluginName !== "HtmlEmbed" &&
+        pluginName !== "Code" &&
+        pluginName !== "CodeBlock"
     ),
-    w.BlockToolbar, w.BalloonToolbar
-    ],
+    w.BlockToolbar,
+    w.BalloonToolbar,
+  ],
   ...base,
   blockToolbar: [
     {
-      label:' ',
+      label: " ",
       tooltip: null,
-      icon:'paragraph',
-      items: [  'heading','style']
+      icon: "paragraph",
+      items: ["heading", "style"],
     },
-    '|',
-    'bulletedList', 'numberedList',
-    '|',
-    'alignment',
-    'outdent',
-    'indent',
-    '|',
-    'insertImage','strapiMediaLib','link','blockquote','insertTable',
-    '|', 'showBlocks',
-    '|', 'undo', 'redo', '|',
+    "|",
+    "bulletedList",
+    "numberedList",
+    "|",
+    "alignment",
+    "outdent",
+    "indent",
+    "|",
+    "insertImage",
+    "strapiMediaLib",
+    "link",
+    "blockquote",
+    "insertTable",
+    "|",
+    "showBlocks",
+    "|",
+    "undo",
+    "redo",
+    "|",
   ],
   balloonToolbar: [
-    'bold', 'italic','fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor',
+    "bold",
+    "italic",
+    "fontSize",
+    "fontFamily",
+    "fontColor",
+    "fontBackgroundColor",
     {
-      label:' ',
+      label: " ",
       tooltip: null,
-      icon:`
+      icon: `
       <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" fill="none" width="24" height="24"/>
       <g>
       <path d="M14.348 12H21v2h-4.613c.24.515.368 1.094.368 1.748 0 1.317-.474 2.355-1.423 3.114-.947.76-2.266 1.138-3.956 1.138-1.557 0-2.934-.293-4.132-.878v-2.874c.985.44 1.818.75 2.5.928.682.18 1.306.27 1.872.27.68 0 1.2-.13 1.562-.39.363-.26.545-.644.545-1.158 0-.285-.08-.54-.24-.763-.16-.222-.394-.437-.704-.643-.18-.12-.483-.287-.88-.49H3v-2H14.347zm-3.528-2c-.073-.077-.143-.155-.193-.235-.126-.202-.19-.44-.19-.713 0-.44.157-.795.47-1.068.313-.273.762-.41 1.348-.41.492 0 .993.064 1.502.19.51.127 1.153.35 1.93.67l1-2.405c-.753-.327-1.473-.58-2.16-.76-.69-.18-1.414-.27-2.173-.27-1.544 0-2.753.37-3.628 1.108-.874.738-1.312 1.753-1.312 3.044 0 .302.036.58.088.848h3.318z"/>
       </g>
       </svg>`,
-      items: [ 'underline', 'strikethrough', 'superscript', 'subscript' ]
+      items: ["underline", "strikethrough", "superscript", "subscript"],
     },
-    '|',
-    'removeFormat',
-  ]
-}
+    "|",
+    "removeFormat",
+  ],
+};

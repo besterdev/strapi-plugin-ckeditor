@@ -1,11 +1,10 @@
 import { auth, request } from "@strapi/helper-plugin";
-import cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from "lodash/cloneDeep";
 
 import baseConfigs from "./configs";
 import pluginId from "../../../utils/pluginId";
 
 const importLang = async (config, language) => {
-  
   if (!language) return;
 
   const { plugins: configPlugins = [] } = config;
@@ -36,7 +35,7 @@ const importLang = async (config, language) => {
     { name: "SourceEditing", module: "ckeditor5-source-editing" },
     { name: "Highlight", module: "ckeditor5-highlight" },
     { name: "Style", module: "ckeditor5-style" },
-    { name: "ShowBlocks", module: "ckeditor5-show-blocks" }
+    { name: "ShowBlocks", module: "ckeditor5-show-blocks" },
   ];
 
   const basicStylesPlugin = [
@@ -49,7 +48,12 @@ const importLang = async (config, language) => {
     "Underline",
   ];
 
-  const fontPlugin = ["FontBackgroundColor", "FontColor", "FontFamily", "FontSize"];
+  const fontPlugin = [
+    "FontBackgroundColor",
+    "FontColor",
+    "FontFamily",
+    "FontSize",
+  ];
 
   const listPlugin = ["List", "DocumentList"];
 
@@ -85,7 +89,12 @@ const setLanguage = async (config) => {
 
   const preferedLanguage = auth.getUserInfo().preferedLanguage;
 
-  const { ui = preferedLanguage || 'en', content, textPartLanguage, ignorei18n } = config.language || {};
+  const {
+    ui = preferedLanguage || "en",
+    content,
+    textPartLanguage,
+    ignorei18n,
+  } = config.language || {};
 
   if (languageContent) {
     const locale = languageContent.split("-")[0];
@@ -110,7 +119,8 @@ const setLanguage = async (config) => {
 };
 
 const getCurrentConfig = (presetName) => {
-  const { configs: userConfigs, configsOverwrite: overwrite } = globalThis.CKEditorConfig || {};
+  const { configs: userConfigs, configsOverwrite: overwrite } =
+    globalThis.CKEditorConfig || {};
 
   let configs;
 
@@ -119,13 +129,22 @@ const getCurrentConfig = (presetName) => {
   } else {
     configs = baseConfigs;
     if (userConfigs) {
-      Object.keys(userConfigs).map(cfgName=>{
-        if(baseConfigs.hasOwnProperty(cfgName)){
-          configs[cfgName].fields = { ...baseConfigs[cfgName].field, ...userConfigs[cfgName].field };
-          configs[cfgName].styles = userConfigs[cfgName].styles || baseConfigs[cfgName].styles;
-          configs[cfgName].editorConfig = { ...baseConfigs[cfgName].editorConfig, ...userConfigs[cfgName].editorConfig };
-        } else { configs[cfgName] = userConfigs[cfgName] }
-      })
+      Object.keys(userConfigs).map((cfgName) => {
+        if (baseConfigs.hasOwnProperty(cfgName)) {
+          configs[cfgName].fields = {
+            ...baseConfigs[cfgName].field,
+            ...userConfigs[cfgName].field,
+          };
+          configs[cfgName].styles =
+            userConfigs[cfgName].styles || baseConfigs[cfgName].styles;
+          configs[cfgName].editorConfig = {
+            ...baseConfigs[cfgName].editorConfig,
+            ...userConfigs[cfgName].editorConfig,
+          };
+        } else {
+          configs[cfgName] = userConfigs[cfgName];
+        }
+      });
     }
   }
 
@@ -135,7 +154,9 @@ const getCurrentConfig = (presetName) => {
 };
 
 const setPlugins = (config, { responsiveDimensions }, toggleMediaLib) => {
-  const configPluginNames = config.editorConfig?.plugins ? [ ...config.editorConfig.plugins.map((p) => p.pluginName)] : [];
+  const configPluginNames = config.editorConfig?.plugins
+    ? [...config.editorConfig.plugins.map((p) => p.pluginName)]
+    : [];
 
   if (configPluginNames.includes("StrapiMediaLib")) {
     config.editorConfig.strapiMediaLib = { toggle: toggleMediaLib };
@@ -152,7 +173,8 @@ const setPlugins = (config, { responsiveDimensions }, toggleMediaLib) => {
     config.editorConfig.WordCountPlugin = true;
   }
 };
-const requestConfig = (key) => request(`/${pluginId}/config/${key}`, { method: "GET" });
+const requestConfig = (key) =>
+  request(`/${pluginId}/config/${key}`, { method: "GET" });
 
 export const getConfiguration = async (presetName, toggleMediaLib) => {
   const currentConfig = getCurrentConfig(presetName);

@@ -11,6 +11,8 @@ import MediaLib from "../MediaLib";
 import ckeditor5Dll from "ckeditor5/build/ckeditor5-dll.js";
 import ckeditor5EditorClassicDll from "@ckeditor/ckeditor5-editor-classic/build/editor-classic.js";
 
+import './theme/app.css'
+
 const GlobalStyling = getGlobalStyling();
 
 const Wrapper = styled("div")`${({ editorStyles }) => editorStyles}`;
